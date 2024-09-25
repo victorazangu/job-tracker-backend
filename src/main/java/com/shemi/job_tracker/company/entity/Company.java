@@ -1,6 +1,10 @@
 package com.shemi.job_tracker.company.entity;
 
+import com.shemi.job_tracker.job.entity.Job;
+import com.shemi.job_tracker.review.entity.Review;
 import jakarta.persistence.*;
+
+import java.util.List;
 
 import static jakarta.persistence.GenerationType.AUTO;
 
@@ -13,13 +17,13 @@ public class Company {
     private String name;
     private String description;
 
-    public Company() {
-    }
+    @OneToMany
+    private List<Job> jobs;
 
-    public Company(Long id, String name, String description) {
-        this.id = id;
-        this.name = name;
-        this.description = description;
+    @OneToMany
+    private List<Review> reviews;
+
+    public Company() {
     }
 
     public Long getId() {
@@ -46,12 +50,21 @@ public class Company {
         this.description = description;
     }
 
+    public List<Job> getJobs() {
+        return jobs;
+    }
+
+    public void setJobs(List<Job> jobs) {
+        this.jobs = jobs;
+    }
+
     @Override
     public String toString() {
         return "Company{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
+                ", jobs=" + jobs +
                 '}';
     }
 }
