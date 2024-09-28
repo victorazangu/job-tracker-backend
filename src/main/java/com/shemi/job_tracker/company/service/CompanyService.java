@@ -6,13 +6,13 @@ import java.util.List;
 import java.util.Optional;
 
 public interface CompanyService {
-    public Company createCompany(Company company);
+    Company createCompany(Company company);
 
-    public List<Company> getAllCompanies();
+    List<Company> getAllCompanies();
 
-    public Optional<Company> getCompany(Long id);
+    Optional<Company> getCompany(Long id);
 
-    public Company updateCompany(Long id, Company body);
+    Company updateCompany(Long id, Company body);
 
-    public void deleteCompany(Long id);
+    void deleteCompany(Long id);
 }

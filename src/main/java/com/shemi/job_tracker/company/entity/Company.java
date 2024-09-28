@@ -1,5 +1,6 @@
 package com.shemi.job_tracker.company.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.shemi.job_tracker.job.entity.Job;
 import com.shemi.job_tracker.review.entity.Review;
 import jakarta.persistence.*;
@@ -17,10 +18,19 @@ public class Company {
     private String name;
     private String description;
 
-    @OneToMany
+    public List<Review> getReviews() {
+        return reviews;
+    }
+
+    public void setReviews(List<Review> reviews) {
+        this.reviews = reviews;
+    }
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "company")
     private List<Job> jobs;
 
-    @OneToMany
+    @OneToMany(mappedBy = "company")
     private List<Review> reviews;
 
     public Company() {

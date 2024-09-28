@@ -1,43 +1,35 @@
 package com.shemi.job_tracker.review.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.shemi.job_tracker.company.entity.Company;
 import jakarta.persistence.*;
 
-import static jakarta.persistence.GenerationType.AUTO;
+import static jakarta.persistence.GenerationType.IDENTITY;
 
 @Entity
 @Table(name = "reviews")
 public class Review {
     @Id
-    @GeneratedValue(strategy = AUTO)
-    private int id;
-    private Long companyId;
+    @GeneratedValue(strategy = IDENTITY)
+    private Long id;
     private String title;
     private String description;
+    private double rating;
+
+    @JsonIgnore
+    @ManyToOne
+    private Company company;
+
 
     public Review() {
     }
 
-    public Review(int id, Long companyId, String title, String description) {
-        this.id = id;
-        this.companyId = companyId;
-        this.title = title;
-        this.description = description;
-    }
-
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
-    }
-
-    public Long getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Long companyId) {
-        this.companyId = companyId;
     }
 
     public String getTitle() {
@@ -56,13 +48,27 @@ public class Review {
         this.description = description;
     }
 
+    public double getRating() {
+        return rating;
+    }
+
+    public void setRating(double rating) {
+        this.rating = rating;
+    }
+    public Company getCompany() {
+        return company;
+    }
+
+    public void setCompany(Company company) {
+        this.company = company;
+    }
     @Override
     public String toString() {
         return "Review{" +
                 "id=" + id +
-                ", companyId=" + companyId +
                 ", title='" + title + '\'' +
                 ", description='" + description + '\'' +
+                ", rating=" + rating +
                 '}';
     }
 }

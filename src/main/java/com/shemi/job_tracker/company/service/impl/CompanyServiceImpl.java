@@ -19,7 +19,7 @@ public class CompanyServiceImpl implements CompanyService {
         this.repository = repository;
     }
 
-    public Company createCompany(Company company) {
+     public Company createCompany(Company company) {
         return repository.save(company);
     }
 
@@ -34,9 +34,11 @@ public class CompanyServiceImpl implements CompanyService {
     public Company updateCompany(Long id, Company body) {
         Optional<Company> company = repository.findById(id);
         if (company.isPresent()) {
-            company.get().setName(body.getName());
-            company.get().setDescription(body.getDescription());
-            return repository.save(company.get());
+            Company companyToUpdate = company.get();
+            companyToUpdate.setName(body.getName());
+            companyToUpdate.setDescription(body.getDescription());
+            companyToUpdate.setJobs(body.getJobs());
+            return repository.save(companyToUpdate);
         }
         return null;
     }

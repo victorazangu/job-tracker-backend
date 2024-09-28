@@ -20,7 +20,7 @@ public class JobController {
     @Autowired
     private JobServiceImpl service;
 
-    @GetMapping("/")
+    @GetMapping
     public ResponseEntity<?> findAll() {
         List<Job> jobs = service.getAllJobs();
         Map<String,String> errors = new HashMap<>();
@@ -31,7 +31,7 @@ public class JobController {
         return ResponseEntity.ok(jobs);
     }
 
-    @PostMapping("/")
+    @PostMapping
     public void addJob(@RequestBody Job job) {
         service.createJob(job);
     }
